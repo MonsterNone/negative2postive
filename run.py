@@ -1,10 +1,22 @@
 # 测试
 # 通过最小和最大的r/g/b分量计算y=kx+b公式然后替换
 
-from PIL import Image
+from PIL import Image, ImageCms
 import numpy as np
-
+import io
 import os
+
+srgb = ImageCms.createProfile('sRGB')
+
+
+# https://stackoverflow.com/questions/31865743/pil-pillow-decode-icc-profile-information
+def convert_to_srgb(icc_profile, img):
+    f = io.BytesIO(icc_profile)
+    icc = ImageCms.ImageCmsProfile(f)
+    img = ImageCms.profileToProfile(img, icc, srgb)
+    return img
+    
+
 
 def single_np(arr, target):
     arr = np.array(arr)
@@ -44,6 +56,7 @@ def reverse(p):
 
 def process(file_name):
     src = Image.open('in/' + file_name)
+    icc_profile = src.info.get('icc_profile', '')
     r, g, b = src.split()
     tmp_r = reverse(r)
     tmp_g = reverse(g)
@@ -54,12 +67,19 @@ def process(file_name):
     b = Image.fromarray(tmp_b).convert('L')
 
     img = Image.merge('RGB', (r, g, b))
-    img.save('out/' + file_name[:-4] + '.jpg', dpi=(300,300))
+    
+    if icc_profile:
+        img = convert_to_srgb(icc_profile, img)
+        
+    img.save('out/' + file_name[:-4] + '.jpg',
+             format = "JPEG",
+             quality = 100,
+             icc_profile=img.info.get('icc_profile', ''),
+             dpi=(300,300))
 
 
 print('本程序会读取in文件夹中的所有.tif文件并输出到out文件夹中。按回车继续')
 input()
-
 
 for i in os.listdir('in/'):
     if i[-4:] != '.tif':
