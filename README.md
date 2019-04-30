@@ -10,7 +10,8 @@ Convert negative film to normal colour. 将翻拍的彩色负片转换成正常�
 (实际代码中并没有管18%灰的问题，只是简单地倒置曲线)
 
 # 效果演示
-![使用程序](IMG_0209 - 副本.jpg)
+随手放一张之前测试镜头的图，稍后更新更多图片
+![使用程序](https://github.com/MonsterNone/negative2postive/raw/master/IMG_0209%20-%20%E5%89%AF%E6%9C%AC.jpg)
 
 # 原始图片的准备
 > 我是直接翻拍的，扫描出来的负片（负片正扫）应该也可以
