@@ -30,7 +30,7 @@ Convert negative film to normal colour. 将翻拍的彩色负片转换成正常�
 也可以后期在ps里面设置。扫描就无所谓了
 
 # 程序使用说明
-1. 下载。Windows端直接下载打包好的run.exe，Mac的话自己安装下python3的numpy和pillow模块吧（不会的自行百度）。Linux...Linux就别用了，没有ACR解raw很麻烦
+1. 下载https://github.com/MonsterNone/negative2postive/raw/master/run.exe 。Windows端直接下载打包好的run.exe，Mac的话自己安装下python3的numpy和pillow模块吧（不会的自行百度）。Linux...Linux就别用了，没有ACR解raw很麻烦
 2. 在程序同一目录下创建两个文件in 和 out
 3. 把上一步骤准备好的.tif图片放到in里面
 4. 运行
